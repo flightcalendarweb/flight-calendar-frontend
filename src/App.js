@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { generateICSFile } from './utils/icsGenerator';
-import { BrowserRouter as Router, Route, Routes, Link, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 
 function FlightCode() {
   // Extract the `flightcode` parameter from the URL
