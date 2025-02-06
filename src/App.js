@@ -2,6 +2,18 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { generateICSFile } from './utils/icsGenerator';
+import { BrowserRouter as Router, Route, Routes, Link, useParams } from 'react-router-dom';
+
+function FlightCode() {
+  // Extract the `flightcode` parameter from the URL
+  const { flightcode } = useParams();
+
+  return (
+    <div>
+      <h1>Flight Code: {flightcode}</h1>
+    </div>
+  );
+}
 
 const App = () => {
   // State to manage event details
@@ -44,83 +56,82 @@ const App = () => {
   };
 
   return (
+    <>
+    <Router>
+      <Routes>
+        <Route path="/code/:flightcode" element={<FlightCode />} />
+      </Routes>
+    </Router>
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Generate .ics File</h1>
+        <h1>Generate .ics File</h1>
 
-      {/* Form to input event details */}
-      <div style={{ marginBottom: '20px' }}>
-        <label>
-          Event Summary:
-          <input
-            type="text"
-            name="summary"
-            value={eventDetails.summary}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Event Description:
-          <input
-            type="text"
-            name="description"
-            value={eventDetails.description}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Event Location:
-          <input
-            type="text"
-            name="location"
-            value={eventDetails.location}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Start Date:
-          <input
-            type="date"
-            name="startDate"
-            value={eventDetails.startDate || ''}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Start Time:
-          <input
-            type="time"
-            name="startTime"
-            value={eventDetails.startTime || ''}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          End Date:
-          <input
-            type="date"
-            name="endDate"
-            value={eventDetails.endDate || ''}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          End Time:
-          <input
-            type="time"
-            name="endTime"
-            value={eventDetails.endTime || ''}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
+        {/* Form to input event details */}
+        <div style={{ marginBottom: '20px' }}>
+          <label>
+            Event Summary:
+            <input
+              type="text"
+              name="summary"
+              value={eventDetails.summary}
+              onChange={handleInputChange} />
+          </label>
+          <br />
+          <label>
+            Event Description:
+            <input
+              type="text"
+              name="description"
+              value={eventDetails.description}
+              onChange={handleInputChange} />
+          </label>
+          <br />
+          <label>
+            Event Location:
+            <input
+              type="text"
+              name="location"
+              value={eventDetails.location}
+              onChange={handleInputChange} />
+          </label>
+          <br />
+          <label>
+            Start Date:
+            <input
+              type="date"
+              name="startDate"
+              value={eventDetails.startDate || ''}
+              onChange={handleInputChange} />
+          </label>
+          <label>
+            Start Time:
+            <input
+              type="time"
+              name="startTime"
+              value={eventDetails.startTime || ''}
+              onChange={handleInputChange} />
+          </label>
+          <br />
+          <label>
+            End Date:
+            <input
+              type="date"
+              name="endDate"
+              value={eventDetails.endDate || ''}
+              onChange={handleInputChange} />
+          </label>
+          <label>
+            End Time:
+            <input
+              type="time"
+              name="endTime"
+              value={eventDetails.endTime || ''}
+              onChange={handleInputChange} />
+          </label>
+        </div>
 
-      {/* Button to download the .ics file */}
-      <button onClick={handleDownloadICS}>Download .ics File</button>
-    </div>
+        {/* Button to download the .ics file */}
+        <button onClick={handleDownloadICS}>Download .ics File</button>
+      </div></>
   );
 };
 
